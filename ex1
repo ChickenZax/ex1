@@ -8,7 +8,7 @@ namespace Test
 {
     internal class Program
     {
-        static int readInt(string komunikat, int min = int.MinValue, int max = int.MaxValue)
+        static int readInt(string komunikat, int min = 4, int max = int.MaxValue)
         {
             string str;
             int n;
