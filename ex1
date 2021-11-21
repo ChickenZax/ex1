@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Test
+{
+    internal class Program
+    {
+        static int readInt(string komunikat, int min = int.MinValue, int max = int.MaxValue)
+        {
+            string str;
+            int n;
+            while (true)
+            {
+                Console.WriteLine(komunikat);
+                str = Console.ReadLine();
+                try
+                {
+                    n = int.Parse(str);
+                    if ((n < min) || (n > max))
+                    {
+                        Console.WriteLine($" Wprowadzona liczba jest z poza dozwolonego  zakresu<{min},{max}>");
+                    }
+                    break;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Niepoprawny format liczby! ");
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine($"Wprowadzona liczba jest z poza dopusczalnego zakresu dla typu int: <{int.MinValue},{int.MaxValue}>");
+                }
+                catch (ArgumentNullException)
+                {
+                    Console.WriteLine("Wprowadzono pusty łańcuch! ");
+                }
+            }
+            return n;
+        }
+        static void Main(string[] args)
+        {
+            int lewy = readInt("Podaj lewą stronę przedziału: ");
+            int prawy = readInt("Podaj prawą stronę przedziału: ");
+            
+            bool[] parzyste = new bool[prawy+1];
+            for (int i = lewy; i <= prawy; i++)
+            {
+                if (i % 2 == 0) parzyste[i] = true;
+             
+            }
+            Console.Write("Liczby parzyste: ");
+            for (int i = lewy; i <= prawy; i++)
+            {
+                if (parzyste[i] == true) Console.Write(i + " ");
+            }
+            Console.WriteLine();
+
+
+            bool[] tab = new bool[prawy + 1];
+            double g = Math.Sqrt(prawy+1);
+            for (int i = 2; i <= g; i++)
+            {
+                if (tab[i] == true) continue;
+                int w = i * i;
+                while (w <= (prawy+1))
+                {
+                    tab[w] = true;
+                    w = w + i;
+                }
+            }
+            for (int i = 2; i < (prawy+1); i++)
+            {
+                for(int j = 2; j < (prawy+1); j++)
+                {
+                    if (tab[i] == false && tab[j] == false)
+                    {
+                        for (int k = lewy; k <= prawy; k++)
+                        {
+                            if (parzyste[k] == true)
+                            {
+                                if(i+j == k)
+                                {
+                                    Console.WriteLine($"{i}+{j}={k}");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            Console.ReadKey();
+        }
+    }
+}
