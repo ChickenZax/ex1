@@ -59,11 +59,11 @@ namespace Test
             Console.WriteLine();
 
 
-            bool[] tab = new bool[prawy + 1];
+            bool[] liczbyPierwsze = new bool[prawy + 1];
             double g = Math.Sqrt(prawy+1);
             for (int i = 2; i <= g; i++)
             {
-                if (tab[i] == true) continue;
+                if (liczbyPierwsze[i] == true) continue;
                 int w = i * i;
                 while (w <= (prawy+1))
                 {
@@ -75,7 +75,7 @@ namespace Test
             {
                 for(int j = 2; j < (prawy+1); j++)
                 {
-                    if (tab[i] == false && tab[j] == false)
+                    if (liczbyPierwsze[i] == false && liczbyPierwsze[j] == false)
                     {
                         for (int k = lewy; k <= prawy; k++)
                         {
